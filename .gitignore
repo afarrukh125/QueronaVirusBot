@@ -2,7 +2,7 @@
 **/build/
 !src/**/build/
 out
-start.sh
+init.sh
 
 # Ignore Gradle GUI config
 gradle-app.setting

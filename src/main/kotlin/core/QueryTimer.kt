@@ -23,7 +23,7 @@ class QueryTimer(var evt: ReadyEvent) : TimerTask() {
         println(jsonObject)
         if(eligible)
             evt.jda.openPrivateChannelById(USER_ID).queue { channel ->
-                channel.sendMessage("Age is now $age so you can register").queue()
+                channel.sendMessage("Age is now $age so you can register for the vaccine").queue()
             }
     }
 
