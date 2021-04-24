@@ -23,7 +23,7 @@ class QueryTimer(var evt: ReadyEvent) : TimerTask() {
             val date = Date()
             val eligible: Boolean = jsonObject["eligible"] as Boolean
             val age = jsonObject["age"]
-            println(jsonObject)
+            println("$date: $jsonObject")
             if(eligible)
                 evt.jda.openPrivateChannelById(USER_ID).queue { channel ->
                     channel.sendMessage("$date: Age is now $age so you can register for the vaccine").queue()
