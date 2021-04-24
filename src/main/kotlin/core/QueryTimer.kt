@@ -6,6 +6,7 @@ import okhttp3.Request
 import okhttp3.Response
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
+import java.net.ConnectException
 import java.util.*
 
 class QueryTimer(var evt: ReadyEvent) : TimerTask() {
@@ -15,16 +16,22 @@ class QueryTimer(var evt: ReadyEvent) : TimerTask() {
     override fun run() {
         val client = OkHttpClient();
         val request: Request = Request.Builder().url(URL).build()
-        val response: Response = client.newCall(request).execute();
-        val rawJson = response.body?.string()
-        val jsonObject: JSONObject = (JSONParser().parse(rawJson) as JSONObject)
-        val eligible: Boolean = jsonObject["eligible"] as Boolean
-        val age = jsonObject["age"]
-        println(jsonObject)
-        if(eligible)
-            evt.jda.openPrivateChannelById(USER_ID).queue { channel ->
-                channel.sendMessage("Age is now $age so you can register for the vaccine").queue()
-            }
+        try {
+            val response: Response = client.newCall(request).execute();
+            val rawJson = response.body?.string()
+            val jsonObject: JSONObject = (JSONParser().parse(rawJson) as JSONObject)
+            val date = Date()
+            val eligible: Boolean = jsonObject["eligible"] as Boolean
+            val age = jsonObject["age"]
+            println(jsonObject)
+            if(eligible)
+                evt.jda.openPrivateChannelById(USER_ID).queue { channel ->
+                    channel.sendMessage("$date: Age is now $age so you can register for the vaccine").queue()
+                }
+        } catch (connectException:ConnectException) {
+            return
+        }
+
     }
 
 }
