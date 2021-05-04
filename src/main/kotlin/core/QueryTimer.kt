@@ -10,7 +10,7 @@ import java.net.ConnectException
 import java.util.*
 
 class QueryTimer(var evt: ReadyEvent) : TimerTask() {
-    val USER_ID: String = "281032702327652352"
+    val USER_ID: String = "<ENTER ID HERE>"
     private val URL: String = "http://localhost:8888"
 
     override fun run() {

@@ -18,8 +18,8 @@ class Bot (private val token: String) {
             GatewayIntent.GUILD_MESSAGES
         )
         this.jda = JDABuilder.create(token, intents)
-            .disableCache(CacheFlag.ACTIVITY, CacheFlag.EMOTE, CacheFlag.CLIENT_STATUS)
-            .addEventListeners(RonaListener())
+                .disableCache(CacheFlag.ACTIVITY, CacheFlag.EMOTE, CacheFlag.CLIENT_STATUS)
+                .addEventListeners(Listener())
             .build().awaitReady();
     }
 }

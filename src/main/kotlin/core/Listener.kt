@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.events.ReadyEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import java.util.*
 
-class RonaListener : ListenerAdapter () {
+class Listener : ListenerAdapter() {
     private val MINUTES: Long = 5
     private val DELAY: Long = 1000 * 60 * MINUTES
 
